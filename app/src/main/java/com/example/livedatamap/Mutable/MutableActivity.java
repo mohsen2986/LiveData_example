@@ -32,6 +32,7 @@ public class MutableActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mutable);
         initUi();
         mutableLiveData.observe(this,changeObserver);
+        setTitle("Mutable LiveData");
         if (savedInstanceState != null)
             setFragmentControlButtonText();
         btn_generate.setOnClickListener(new View.OnClickListener() {
