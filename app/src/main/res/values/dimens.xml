@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_fragment">16sp</dimen>
+    <dimen name="fragment_size">250dp</dimen>
+    <dimen name="activity_text_size">100dp</dimen>
+    <dimen name="activity_btn_size">120dp</dimen>
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/yellow_fragment"
+    android:gravity="center"
+    >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/fragment_alive"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:padding="@dimen/padding_fragment"
+            />
+        <TextView
+            android:id="@+id/txt_transform_fragment_live_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/noting"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:padding="@dimen/padding_fragment"
+            />
+    </LinearLayout>
+
+</LinearLayout>

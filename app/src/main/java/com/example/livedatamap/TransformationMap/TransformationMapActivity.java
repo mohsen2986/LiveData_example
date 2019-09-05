@@ -1,43 +1,38 @@
-package com.example.livedatamap.Mutable;
+package com.example.livedatamap.TransformationMap;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.elyeproj.loaderviewlibrary.LoaderTextView;
 import com.example.livedatamap.R;
 
-import static java.lang.Math.random;
-
-public class MutableActivity extends AppCompatActivity {
-    MutableLiveData<String> mutableLiveData = new MutableLiveData<String>();
+public class TransformationMapActivity extends AppCompatActivity {
+    MutableLiveData<String> mutableLiveData = new MutableLiveData<>();
     LoaderTextView liveData;
     Button addFragment;
-    Button btn_generate;
-    Observer<String> changeObserver =new Observer<String>() {
+    Button generate;
+    Observer<String> observer = new Observer<String>() {
         @Override
         public void onChanged(@Nullable String s) {
             liveData.setText(s);
         }
     };
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        setContentView(R.layout.activity_transformation_map);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mutable);
-        setTitle("Mutable LiveData");
+        setTitle("Transformation Map");
+        mutableLiveData.observe(this , observer);
         initUi();
-        mutableLiveData.observe(this,changeObserver);
-
         if (savedInstanceState != null)
-            setFragmentControlButtonText();
+            setFragmentControlButtonListener();
 
-        btn_generate.setOnClickListener(new View.OnClickListener() {
+        generate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 liveData.resetLoader();
@@ -49,30 +44,23 @@ public class MutableActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (getSupportFragmentManager().getBackStackEntryCount() == 0){
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.container ,new  MutableFragment())
+                            .replace(R.id.container , new TransformationFragment())
                             .addToBackStack("").commit();
                 }else{
                     getSupportFragmentManager().popBackStack();
                 }
             }
         });
-        getSupportFragmentManager().addOnBackStackChangedListener(
-                new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
-                setFragmentControlButtonText();
-            }
-        });
     }
     private void initUi(){
-        liveData = findViewById(R.id.txt_mutable_live_a);
-        addFragment = findViewById(R.id.btn_mutable_add_fragment);
-        btn_generate = findViewById(R.id.btn_mutable_generate);
+        liveData = findViewById(R.id.txt_transform_live);
+        addFragment = findViewById(R.id.btn_transform_add_fragment);
+        generate = findViewById(R.id.btn_transform_generate);
     }
-    private void setFragmentControlButtonText(){
+    private void setFragmentControlButtonListener(){
         if (getSupportFragmentManager().getBackStackEntryCount() == 0)
-            addFragment.setText("Remove Fragment");
-        else
             addFragment.setText("Add Fragment");
+        else
+            addFragment.setText("Remove Fragment");
     }
 }
